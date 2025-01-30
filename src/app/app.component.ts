@@ -13,4 +13,8 @@ import { CommonModule } from '@angular/common';
 })
 export class AppComponent {
   userDetails = userDetails;
+
+  onSelectUser(name: string) {
+    console.log(`User ${name} is selected`);
+  }
 }

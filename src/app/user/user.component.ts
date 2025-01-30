@@ -1,4 +1,13 @@
-import { Component, computed, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  EventEmitter,
+  Input,
+  input,
+  output,
+  Output,
+  signal,
+} from '@angular/core';
 import { userDetails } from './userDetails';
 import { CommonModule } from '@angular/common';
 
@@ -12,17 +21,21 @@ const randomUser = Math.floor(Math.random() * userDetails.length);
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  // @Input() name!: string;
-  // @Input() avatar!: string;
+  @Input({ required: true }) name!: string;
+  @Input({ required: true }) avatar!: string;
+  // name = input.required<string>();
+  // avatar = input.required<string>(); it is a signal
 
-  name = input.required<string>();
-  avatar = input.required<string>();
+  @Output() select = new EventEmitter<string>();
+  // select = output<string>(); //it is not a signal
 
-  imagePath = computed(() => '../assets/' + this.avatar());
+  // imagePath = computed(() => '../assets/' + this.avatar());
 
-  // get imagePath() {
-  //   return '../assets/' + this.avatar;
-  // }
+  get imagePath() {
+    return '../assets/' + this.avatar;
+  }
 
-  onSelectUser(name: string) {}
+  onSelectUser(name: string) {
+    this.select.emit(name);
+  }
 }
