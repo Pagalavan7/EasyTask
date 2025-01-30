@@ -1,4 +1,4 @@
-import { Component, computed, Input, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { userDetails } from './userDetails';
 import { CommonModule } from '@angular/common';
 
@@ -12,12 +12,17 @@ const randomUser = Math.floor(Math.random() * userDetails.length);
   styleUrl: './user.component.css',
 })
 export class UserComponent {
-  @Input() name!: string;
-  @Input() avatar!: string;
+  // @Input() name!: string;
+  // @Input() avatar!: string;
 
-  get imagePath() {
-    return '../assets/' + this.avatar;
-  }
+  name = input.required<string>();
+  avatar = input.required<string>();
+
+  imagePath = computed(() => '../assets/' + this.avatar());
+
+  // get imagePath() {
+  //   return '../assets/' + this.avatar;
+  // }
 
   onSelectUser(name: string) {}
 }
