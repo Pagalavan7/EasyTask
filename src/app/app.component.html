@@ -5,6 +5,7 @@
     @for (user of userDetails; track user.id) {
     <li>
       <app-user
+        [selected]="selectedUser?.id == user.id"
         (select)="onSelectUser($event)"
         [name]="user.name"
         [avatar]="user.avatar"

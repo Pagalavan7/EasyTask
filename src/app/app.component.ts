@@ -15,10 +15,10 @@ import { User } from '../Models/user';
 })
 export class AppComponent {
   userDetails = userDetails;
-  selectedUser!: User;
+  selectedUser?: User;
 
   onSelectUser(user: User) {
-    console.log(user);
     this.selectedUser = user;
+    console.log(this.selectedUser);
   }
 }

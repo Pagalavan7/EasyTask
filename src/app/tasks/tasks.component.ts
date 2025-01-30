@@ -10,7 +10,7 @@ import { User } from '../../Models/user';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input({ required: true }) selectedUser!: User;
+  @Input({ required: true }) selectedUser?: User;
 
   tasksList = [
     {
@@ -39,10 +39,6 @@ export class TasksComponent {
   ];
 
   get selectedUserTasks() {
-    const selectedUserTasks = this.tasksList.filter(
-      (x) => x.userId == this.selectedUser?.id
-    );
-    console.log(selectedUserTasks);
     return this.tasksList.filter((x) => x.userId == this.selectedUser?.id);
   }
 }
