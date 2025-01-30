@@ -8,11 +8,11 @@
         (select)="onSelectUser($event)"
         [name]="user.name"
         [avatar]="user.avatar"
+        [id]="user.id"
       ></app-user>
     </li>
     }
   </ul>
-  @if (name!="David Miller") {
-  <app-tasks [name]="name" />
-  }
+
+  <app-tasks [selectedUser]="selectedUser" />
 </main>

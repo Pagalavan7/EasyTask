@@ -5,6 +5,7 @@ import { UserComponent } from './user/user.component';
 import { userDetails } from './user/userDetails';
 import { CommonModule } from '@angular/common';
 import { TasksComponent } from './tasks/tasks.component';
+import { User } from '../Models/user';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -14,9 +15,10 @@ import { TasksComponent } from './tasks/tasks.component';
 })
 export class AppComponent {
   userDetails = userDetails;
-  name: string = '';
+  selectedUser!: User;
 
-  onSelectUser(name: string) {
-    this.name = name;
+  onSelectUser(user: User) {
+    console.log(user);
+    this.selectedUser = user;
   }
 }

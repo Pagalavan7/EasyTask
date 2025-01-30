@@ -10,6 +10,7 @@ import {
 } from '@angular/core';
 import { userDetails } from './userDetails';
 import { CommonModule } from '@angular/common';
+import { User } from '../../Models/user';
 
 const randomUser = Math.floor(Math.random() * userDetails.length);
 
@@ -23,10 +24,12 @@ const randomUser = Math.floor(Math.random() * userDetails.length);
 export class UserComponent {
   @Input({ required: true }) name!: string;
   @Input({ required: true }) avatar!: string;
+  @Input({ required: true }) id!: string;
+
   // name = input.required<string>();
   // avatar = input.required<string>(); it is a signal
 
-  @Output() select = new EventEmitter<string>();
+  @Output() select = new EventEmitter<User>();
   // select = output<string>(); //it is not a signal
 
   // imagePath = computed(() => '../assets/' + this.avatar());
@@ -35,7 +38,13 @@ export class UserComponent {
     return '../assets/' + this.avatar;
   }
 
-  onSelectUser(name: string) {
-    this.select.emit(name);
+  onSelectUser() {
+    const selectedUser: User = {
+      name: this.name,
+      avatar: this.avatar,
+      id: this.id,
+    };
+    console.log(selectedUser);
+    this.select.emit(selectedUser);
   }
 }
