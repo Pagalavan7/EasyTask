@@ -1,16 +1,20 @@
 import { Component, Input } from '@angular/core';
 import { TaskComponent } from './task/task.component';
 import { User } from '../../Models/user';
+import { AddTaskComponent } from './add-task/add-task.component';
+import { NewTask } from '../../Models/newTask.model';
 
 @Component({
   selector: 'app-tasks',
   standalone: true,
-  imports: [TaskComponent],
+  imports: [TaskComponent, AddTaskComponent],
   templateUrl: './tasks.component.html',
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
   @Input({ required: true }) selectedUser?: User;
+
+  addTaskFormOpen: boolean = false;
 
   tasksList = [
     {
@@ -38,7 +42,31 @@ export class TasksComponent {
     },
   ];
 
+  onCompleteTask(completedTaskId: string) {
+    this.tasksList = this.tasksList.filter((x) => x.id != completedTaskId);
+  }
+
   get selectedUserTasks() {
     return this.tasksList.filter((x) => x.userId == this.selectedUser?.id);
+  }
+
+  addATask() {
+    this.addTaskFormOpen = true;
+  }
+  closeTaskForm() {
+    this.addTaskFormOpen = false;
+  }
+  addNewTask(newTask: NewTask) {
+    let newTaskDetail = {
+      id: 't3',
+      userId: this.selectedUser!.id,
+      title: newTask.title,
+      summary: newTask.summary,
+      dueDate: newTask['due-date'],
+    };
+
+    this.tasksList.push(newTaskDetail);
+
+    this.addTaskFormOpen = false;
   }
 }

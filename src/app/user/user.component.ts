@@ -45,7 +45,6 @@ export class UserComponent {
       avatar: this.avatar,
       id: this.id,
     };
-    console.log(selectedUser);
     this.select.emit(selectedUser);
   }
 }

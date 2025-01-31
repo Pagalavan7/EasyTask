@@ -3,15 +3,27 @@
   <header>
     <h2>{{ selectedUser.name }}'s Tasks</h2>
     <menu>
-      <button>Add Task</button>
+      <button (click)="addATask()">Add Task</button>
     </menu>
   </header>
 
   <ul>
     @for (task of selectedUserTasks; track task.id) {
-    <li><app-task [selectedUserTask]="task" /></li>
+    <li>
+      <app-task
+        [selectedUserTask]="task"
+        (completedTask)="onCompleteTask($event)"
+      />
+    </li>
     }
   </ul>
+
+  @if (addTaskFormOpen) {
+  <app-add-task
+    (closeNewTaskForm)="closeTaskForm()"
+    (newTask)="addNewTask($event)"
+  />
+  }
 </section>
 
 }

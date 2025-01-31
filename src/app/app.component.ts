@@ -19,6 +19,5 @@ export class AppComponent {
 
   onSelectUser(user: User) {
     this.selectedUser = user;
-    console.log(this.selectedUser);
   }
 }
